@@ -1,7 +1,788 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal website for Junseo Kim with profile, CV, and contact links.">
+  <title>Junseo Kim</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --canvas: #000000;
+      --surface-soft: #0d0d0d;
+      --surface-card: #1a1a1a;
+      --surface-elevated: #262626;
+      --ink: #ffffff;
+      --body: #bbbbbb;
+      --body-strong: #e6e6e6;
+      --muted: #7e7e7e;
+      --hairline: #3c3c3c;
+      --hairline-strong: #262626;
+      --m-blue-light: #0066b1;
+      --m-blue-dark: #1c69d4;
+      --m-red: #e22718;
+      --focus-ring: rgba(255, 255, 255, 0.72);
+      font-family: BMWTypeNextLatin, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--canvas);
+    }
+
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--body);
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+
+    body::selection {
+      background: var(--ink);
+      color: var(--canvas);
+    }
+
+    a {
+      color: var(--ink);
+      text-decoration-color: var(--hairline);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.28em;
+    }
+
+    a:hover {
+      color: var(--body-strong);
+      text-decoration-color: var(--ink);
+    }
+
+    a:focus-visible,
+    .button:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 4px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      overflow-wrap: anywhere;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      color: var(--ink);
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 11ch;
+      font-size: 5rem;
+      line-height: 1;
+    }
+
+    h2 {
+      font-size: 3.5rem;
+      line-height: 1.05;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 24px;
+      top: -80px;
+      z-index: 20;
+      padding: 12px 16px;
+      border: 1px solid var(--ink);
+      background: var(--canvas);
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--hairline-strong);
+      background: rgba(0, 0, 0, 0.94);
+    }
+
+    .nav,
+    .section-inner,
+    .footer-inner {
+      width: min(1440px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .m-mark {
+      display: grid;
+      grid-template-columns: repeat(3, 10px);
+      width: 30px;
+      height: 16px;
+      overflow: hidden;
+    }
+
+    .m-mark span:nth-child(1) {
+      background: var(--m-blue-light);
+    }
+
+    .m-mark span:nth-child(2) {
+      background: var(--m-blue-dark);
+    }
+
+    .m-mark span:nth-child(3) {
+      background: var(--m-red);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 18px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      color: var(--body);
+      font-weight: 400;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    main {
+      background: var(--canvas);
+    }
+
+    .photo-band {
+      position: relative;
+      isolation: isolate;
+      min-height: 78vh;
+      overflow: hidden;
+      border-bottom: 1px solid var(--hairline-strong);
+      background: var(--canvas);
+    }
+
+    .hero-image,
+    .band-image {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .photo-band::before,
+    .cta-band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.62);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1440px, calc(100% - 48px));
+      min-height: 78vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 24px;
+      margin: 0 auto;
+      padding: 96px 0 72px;
+    }
+
+    .eyebrow {
+      color: var(--body-strong);
+      font-size: 0.875rem;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      color: var(--body-strong);
+      font-size: 1.25rem;
+      font-weight: 300;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-width: 148px;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 32px;
+      border: 1px solid var(--ink);
+      border-radius: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-size: 0.875rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .button:hover {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: var(--canvas);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .button.secondary:hover {
+      background: var(--surface-card);
+      color: var(--ink);
+    }
+
+    .m-stripe {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      height: 4px;
+      width: 100%;
+    }
+
+    .m-stripe span:nth-child(1) {
+      background: var(--m-blue-light);
+    }
+
+    .m-stripe span:nth-child(2) {
+      background: var(--m-blue-dark);
+    }
+
+    .m-stripe span:nth-child(3) {
+      background: var(--m-red);
+    }
+
+    section {
+      border-top: 1px solid var(--hairline-strong);
+      padding: 96px 0;
+    }
+
+    .hero,
+    .cta-band {
+      border-top: 0;
+      padding: 0;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr);
+      gap: 64px;
+      align-items: start;
+    }
+
+    .section-label {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section-label .m-stripe {
+      max-width: 180px;
+    }
+
+    .section-body {
+      max-width: 860px;
+    }
+
+    .section-body > p + p {
+      margin-top: 18px;
+    }
+
+    .lead {
+      color: var(--body-strong);
+      font-size: 1.25rem;
+      line-height: 1.45;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .focus-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      padding: 0;
+      margin: 32px 0 0;
+      list-style: none;
+    }
+
+    .focus-item {
+      min-height: 100%;
+      padding: 24px;
+      border: 1px solid var(--hairline);
+      border-radius: 0;
+      background: var(--surface-soft);
+    }
+
+    .focus-item h3 {
+      margin-bottom: 16px;
+      font-size: 1.5rem;
+    }
+
+    .focus-item p {
+      color: var(--body);
+    }
+
+    .course-list,
+    .detail-list {
+      display: grid;
+      gap: 14px;
+      padding: 0;
+      margin: 32px 0 0;
+      list-style: none;
+    }
+
+    .course-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .course-list li,
+    .detail-list li {
+      border: 1px solid var(--hairline);
+      background: var(--surface-soft);
+    }
+
+    .course-list li {
+      min-height: 120px;
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+      color: var(--ink);
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .detail-list li {
+      padding: 24px;
+    }
+
+    .detail-label {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .prompt-example {
+      color: var(--body-strong);
+      font: inherit;
+    }
+
+    .cta-band {
+      position: relative;
+      isolation: isolate;
+      min-height: 560px;
+      overflow: hidden;
+      border-top: 1px solid var(--hairline-strong);
+      border-bottom: 1px solid var(--hairline-strong);
+      background: var(--canvas);
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1440px, calc(100% - 48px));
+      min-height: 560px;
+      display: flex;
+      align-items: flex-end;
+      margin: 0 auto;
+      padding: 80px 0;
+    }
+
+    .cta-copy {
+      max-width: 760px;
+    }
+
+    .cta-copy h2 {
+      margin-top: 18px;
+    }
+
+    .cta-copy p {
+      max-width: 620px;
+      margin-top: 20px;
+      color: var(--body-strong);
+      font-size: 1.2rem;
+    }
+
+    .link-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 28px;
+      padding: 0;
+      margin: 28px 0 0;
+      list-style: none;
+    }
+
+    .link-list a {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      color: var(--ink);
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .link-list a::after {
+      content: ">";
+      margin-left: 10px;
+      color: var(--m-red);
+    }
+
+    footer {
+      border-top: 1px solid var(--hairline-strong);
+      background: var(--canvas);
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      padding: 64px 0;
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 980px) {
+      h1 {
+        font-size: 4rem;
+      }
+
+      h2 {
+        font-size: 2.75rem;
+      }
+
+      .section-heading,
+      .focus-list,
+      .course-list {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading {
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav,
+      .section-inner,
+      .footer-inner,
+      .hero-inner,
+      .cta-inner {
+        width: min(1440px, calc(100% - 32px));
+      }
+
+      .nav {
+        min-height: auto;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+        padding: 18px 0;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+        gap: 12px 16px;
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      h2 {
+        font-size: 2.25rem;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+      }
+
+      section {
+        padding: 72px 0;
+      }
+
+      .photo-band,
+      .hero-inner {
+        min-height: 640px;
+      }
+
+      .hero-inner {
+        padding: 120px 0 48px;
+      }
+
+      .hero-copy,
+      .lead,
+      .cta-copy p {
+        font-size: 1.05rem;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .cta-band,
+      .cta-inner {
+        min-height: 520px;
+      }
+
+      .cta-inner {
+        padding: 64px 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
 <body>
-  <h1>Welcome to my Personal Page</h1>
-  <p>Hosted on GitHub Pages!</p>
-</body>  
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header>
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#main">
+        <span class="m-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>Junseo Kim</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#focus">Focus</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#ai-usage">AI Usage</a></li>
+        <li><a href="#cv">CV</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero photo-band" aria-labelledby="intro-title">
+      <img class="hero-image" src="assets/profile.jpg" alt="Portrait of Junseo Kim" width="4032" height="3024" decoding="async">
+      <div class="hero-inner">
+        <p class="eyebrow">Personal Website</p>
+        <h1 id="intro-title">Junseo Kim</h1>
+        <p class="hero-copy">
+          I build thoughtful software and care about turning clear ideas into useful, reliable digital products.
+        </p>
+        <div class="actions" aria-label="Primary links">
+          <a class="button" href="assets/cv.pdf">Open CV</a>
+          <a class="button secondary" href="#contact">Contact</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="m-stripe" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <section id="about" aria-labelledby="about-title">
+      <div class="section-inner section-heading">
+        <div class="section-label">
+          <p class="eyebrow">Profile</p>
+          <h2 id="about-title">About Me</h2>
+          <div class="m-stripe" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+        <div class="section-body">
+          <p class="lead">
+            Returning from mandatory military service, I rejoined SNU in Spring 2026 and declared an AI interdisciplinary major. Getting back into computer science courses has been challenging, but genuinely exciting.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="focus" aria-labelledby="focus-title">
+      <div class="section-inner section-heading">
+        <div class="section-label">
+          <p class="eyebrow">Engineering</p>
+          <h2 id="focus-title">Focus</h2>
+        </div>
+        <div class="section-body">
+          <p class="lead">
+            I like work that balances engineering detail with product clarity.
+          </p>
+          <ul class="focus-list">
+            <li class="focus-item">
+              <h3>Reliable Systems</h3>
+              <p>Building software that is understandable, maintainable, and predictable.</p>
+            </li>
+            <li class="focus-item">
+              <h3>Practical Interfaces</h3>
+              <p>Designing screens and workflows that are direct, accessible, and responsive.</p>
+            </li>
+            <li class="focus-item">
+              <h3>Clear Communication</h3>
+              <p>Explaining decisions, tradeoffs, and outcomes so teams can move with confidence.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="courses" aria-labelledby="courses-title">
+      <div class="section-inner section-heading">
+        <div class="section-label">
+          <p class="eyebrow">Spring 2026</p>
+          <h2 id="courses-title">Planned Courses</h2>
+          <div class="m-stripe" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+        <div class="section-body">
+          <ul class="course-list">
+            <li>Fundamentals of Deep Learning</li>
+            <li>Fundamentals of Algorithms</li>
+            <li>Computer Vision</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="ai-usage" aria-labelledby="ai-usage-title">
+      <div class="section-inner section-heading">
+        <div class="section-label">
+          <p class="eyebrow">Workflow</p>
+          <h2 id="ai-usage-title">AI Usage</h2>
+        </div>
+        <div class="section-body">
+          <ul class="detail-list">
+            <li>
+              <span class="detail-label">Tool</span>
+              Claude (claude.ai) &amp; Codex
+            </li>
+            <li>
+              <span class="detail-label">Prompt example</span>
+              <span class="prompt-example">"Build a static personal website in the repo root. Use assets/profile.jpg or assets/profile.png as the profile image. Link assets/cv.pdf from the CV or Resume section. Keep the site simple and compatible with GitHub Pages. Do not use a backend or paid external API. Make the page responsive and accessible."</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="cv" class="cta-band" aria-labelledby="cv-title">
+      <img class="band-image" src="assets/profile.jpg" alt="" width="4032" height="3024" loading="lazy" decoding="async">
+      <div class="cta-inner">
+        <div class="cta-copy">
+          <p class="eyebrow">CV</p>
+          <h2 id="cv-title">Current CV</h2>
+          <p>
+            My current CV is available as a PDF.
+          </p>
+          <div class="actions" aria-label="CV links">
+            <a class="button" href="assets/cv.pdf">Open CV</a>
+            <a class="button secondary" href="assets/cv.pdf" download>Download CV</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="section-inner section-heading">
+        <div class="section-label">
+          <p class="eyebrow">Connect</p>
+          <h2 id="contact-title">Contact</h2>
+          <div class="m-stripe" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+        <div class="section-body">
+          <p class="lead">
+            The best place to find my public work is GitHub.
+          </p>
+          <ul class="link-list">
+            <li><a href="https://github.com/junseo9811">GitHub</a></li>
+            <li><a href="assets/cv.pdf">Resume PDF</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>&copy; 2026 Junseo Kim. Built for GitHub Pages.</p>
+    </div>
+  </footer>
+</body>
 </html>
