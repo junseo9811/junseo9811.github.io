@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Junseo Kim - Seoul National University student in Rural Systems Engineering and Artificial Intelligence.">
+  <meta name="description" content="Junseo Kim - SNU undergraduate exploring Physical AI, embodied intelligence, and machine learning. Seeking research opportunities for winter 2026–2027.">
   <title>Junseo Kim</title>
   <style>
     :root {
@@ -43,6 +43,7 @@
     .muted { color: var(--muted); }
 
     .project { padding: 2px 0 0; }
+    .project + .project { margin-top: 28px; }
     .project-meta { margin-top: 3px; color: var(--muted); font-size: .91rem; }
     .project-description { margin-top: 13px; }
     .project ul { margin: 11px 0 0; padding-left: 20px; }
@@ -52,6 +53,7 @@
     .details { display: grid; grid-template-columns: 150px 1fr; gap: 8px 18px; }
     .details dt { color: var(--muted); }
     .details dd { margin: 0; }
+    .background-heading { margin-top: 22px; }
     .course-list { margin: 12px 0 0; padding-left: 20px; }
     .course-list li + li { margin-top: 4px; }
     footer { padding-top: 22px; color: var(--muted); font-size: .85rem; }
@@ -84,9 +86,11 @@
   <main id="main">
     <div class="intro">
       <h1>Hello, I’m Junseo Kim.</h1>
-      <p>I am an undergraduate student at Seoul National University, studying Rural Systems Engineering and Artificial Intelligence. I am interested in machine learning, software systems, and embodied intelligence.</p>
+      <p>I am an undergraduate student at Seoul National University, majoring in Rural Systems Engineering with a second major in Artificial Intelligence (Interdisciplinary Program). I am exploring how AI systems learn to understand and interact with the physical world.</p>
+      <p>I am seeking undergraduate research and internship opportunities for winter 2026–2027, with the goal of pursuing a master’s or integrated master’s–Ph.D. program in AI.</p>
       <div class="intro-links">
-        <a href="assets/cv.pdf">CV (PDF)</a>
+        <a href="assets/cv.pdf?v=517910785452">View CV (PDF)</a>
+        <a href="assets/cv.pdf?v=517910785452" download="Junseo_Kim_CV.pdf">Download CV</a>
         <a href="https://github.com/junseo9811">GitHub</a>
         <a href="mailto:kkjs03@snu.ac.kr">kkjs03@snu.ac.kr</a>
       </div>
@@ -94,22 +98,47 @@
 
     <section id="about">
       <h2>About</h2>
-      <p>I returned to SNU in Spring 2026 after completing mandatory military service and started the Interdisciplinary Program in Artificial Intelligence. I enjoy taking a problem from a rough idea to a small, working program.</p>
-      <p class="muted">Current interests: Physical AI, embodied intelligence, vision-language-action models, and attention-based architectures.</p>
+      <p>I returned to SNU in Spring 2026 after completing mandatory military service. Through machine learning coursework and my ongoing deep learning studies, I have become interested in how models learn and how new ideas address the limitations of existing methods.</p>
+      <h3 class="background-heading">Research interests</h3>
+      <p class="project-description">Studying attention, recent developments in Transformers, and diffusion models has drawn me toward AI learning methods. I would like to explore how these ideas can help AI systems perceive, reason about, and interact with physical environments. I am still exploring research directions and building my foundations through coursework and projects.</p>
+      <p class="muted">Physical AI · Embodied Intelligence · Multimodal Learning · Computer Vision · Robot Learning · Generative Models</p>
     </section>
 
     <section id="projects">
-      <h2>Projects</h2>
-      <article class="project">
-        <h3>LabFinder</h3>
-        <p class="project-meta">Career-track-based SNU lab recommendation system · Spring 2026</p>
-        <p class="project-description">A command-line Java application that helps students compare research laboratories based on their preferred career path.</p>
+      <h2>Selected projects</h2>
+      <p class="muted">Course projects completed in Spring 2026.</p>
+      <article class="project" style="margin-top: 18px;">
+        <h3>Insurance Charge Prediction</h3>
+        <p class="project-meta">Machine Learning Fundamentals · Spring 2026</p>
+        <p class="project-description">Explored tabular insurance charge prediction under an asymmetric loss function using LightGBM, CatBoost, and a PyTorch MLP.</p>
         <ul>
-          <li>Used the Strategy Pattern to keep separate recommendation logic for Big Tech, industry, startup, and PhD pathways.</li>
-          <li>Combined publication, placement, career-distribution, and time-to-graduation indicators into a weighted matching score.</li>
-          <li>Implemented student and lab profiles with recommend, search, compare, bookmark, and profile-management commands for 35 SNU lab records.</li>
+          <li>Implemented quantile-regression ensembles, feature engineering, cross-validation, and model blending.</li>
+          <li>Analyzed distribution shift and validation leakage to examine the reliability of model evaluation.</li>
+          <li>Reported a held-out penalized error of approximately 1,735 in the project’s internal validation.</li>
+        </ul>
+        <p class="stack">Python · LightGBM · CatBoost · PyTorch · Quantile regression · Ensemble methods</p>
+      </article>
+      <article class="project">
+        <h3>SNU Lab Finder</h3>
+        <p class="project-meta">Computer Programming · Spring 2026</p>
+        <p class="project-description">Developed a Java-based research lab recommendation system to help students compare laboratories based on their goals and preferences.</p>
+        <ul>
+          <li>Used object-oriented design and the Strategy Pattern to organize recommendation logic.</li>
+          <li>Implemented recommendation explanations, lab comparisons, and persistent profiles.</li>
+          <li>Used 35 simulated laboratory profiles for the project.</li>
         </ul>
         <p class="stack">Java · Object-oriented programming · Strategy Pattern · File-based data persistence</p>
+      </article>
+      <article class="project">
+        <h3>Streamflow Modeling with LSTM and SWAT</h3>
+        <p class="project-meta">Engineering Project · Spring 2026</p>
+        <p class="project-description">Compared data-driven and physics-based approaches to watershed streamflow prediction.</p>
+        <ul>
+          <li>Applied an Optuna-tuned LSTM and calibrated a SWAT hydrological model.</li>
+          <li>The LSTM achieved R² = 0.71 and NSE = 0.69 in the course project’s evaluation.</li>
+          <li>Compared data-driven and process-based simulations, analyzing prediction errors and limitations in the underlying data.</li>
+        </ul>
+        <p class="stack">Python · LSTM · Optuna · SWAT · Streamflow prediction</p>
       </article>
     </section>
 
@@ -117,24 +146,34 @@
       <h2>Background</h2>
       <dl class="details">
         <dt>Education</dt>
-        <dd>Seoul National University<br>B.S. in Rural Systems Engineering<br>Interdisciplinary B.S. in Artificial Intelligence (joint major)<br>Expected February 2028 · GPA 3.89 / 4.3 (Fall 2026)</dd>
-        <dt>Skills</dt>
-        <dd>Python, Java, C++, PyTorch</dd>
+        <dd>Seoul National University<br>B.S. in Rural Systems Engineering<br>Second Major: Artificial Intelligence (Interdisciplinary Program)<br>Expected graduation: 2028<br>GPA: 3.89 / 4.30 (as of Spring 2026)</dd>
         <dt>Languages</dt>
         <dd>Korean (native), English (proficient)</dd>
       </dl>
-      <h3 style="margin-top: 22px;">Relevant coursework</h3>
+      <h3 class="background-heading">Technical skills</h3>
+      <dl class="details">
+        <dt>Programming</dt>
+        <dd>Python, Java, C++, JavaScript</dd>
+        <dt>Machine learning</dt>
+        <dd>PyTorch, scikit-learn, LightGBM, CatBoost, Optuna</dd>
+        <dt>Computing &amp; modeling</dt>
+        <dd>Conda, SWAT</dd>
+      </dl>
+      <h3 class="background-heading">Relevant coursework</h3>
       <ul class="course-list">
-        <li>Foundations of Machine Learning</li>
-        <li>Foundations of Deep Learning</li>
-        <li>Computer Programming, Data Structures, Algorithms</li>
+        <li>Machine Learning Fundamentals</li>
+        <li>Deep Learning Fundamentals (in progress, Fall 2026)</li>
+        <li>Computer Programming</li>
+        <li>Data Structures</li>
+        <li>Algorithms (in progress, Fall 2026)</li>
         <li>Engineering Mathematics I &amp; II</li>
+        <li>Applied Engineering Mathematics I &amp; II</li>
       </ul>
     </section>
 
     <section id="contact">
       <h2>Contact</h2>
-      <p><a href="mailto:kkjs03@snu.ac.kr">kkjs03@snu.ac.kr</a> · <a href="https://github.com/junseo9811">github.com/junseo9811</a> · <a href="assets/cv.pdf">CV PDF</a></p>
+      <p><a href="mailto:kkjs03@snu.ac.kr">kkjs03@snu.ac.kr</a> · <a href="https://github.com/junseo9811">github.com/junseo9811</a> · <a href="assets/cv.pdf?v=517910785452">CV PDF</a></p>
     </section>
   </main>
 
